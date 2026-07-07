@@ -20,6 +20,7 @@ Fused multiply-add is supported with IEEE 754 semantics in other major programmi
 * C# [`Math.FusedMultiplyAdd`](https://learn.microsoft.com/en-us/dotnet/api/system.math.fusedmultiplyadd)
 * Python: [`math.fma`](https://docs.python.org/3/library/math.html#math.fma)
 * Rust: [`mul_add`](https://doc.rust-lang.org/std/primitive.f64.html#method.mul_add)
+* Swift: [`addProduct`](https://developer.apple.com/documentation/swift/float/addproduct(_:_:)), [`addingProduct`](https://developer.apple.com/documentation/swift/float/addingproduct(_:_:))
 
 ## Usage
 
