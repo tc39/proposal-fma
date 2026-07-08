@@ -16,8 +16,8 @@ ECMAScript has implemented the first five of these since the beginning, but has 
 
 Fused multiply-add is supported with IEEE 754 semantics in other major programming languages, including:
 * C/C++: [`fma`, `fmaf`, `fmal`](https://en.cppreference.com/cpp/numeric/math/fma)
-* Java `Math.Fma`
-* C# [`Math.FusedMultiplyAdd`](https://learn.microsoft.com/en-us/dotnet/api/system.math.fusedmultiplyadd)
+* Java: `Math.Fma`
+* C#: [`Math.FusedMultiplyAdd`](https://learn.microsoft.com/en-us/dotnet/api/system.math.fusedmultiplyadd)
 * Python: [`math.fma`](https://docs.python.org/3/library/math.html#math.fma)
 * Rust: [`mul_add`](https://doc.rust-lang.org/std/primitive.f64.html#method.mul_add)
 * Swift: [`addProduct`](https://developer.apple.com/documentation/swift/float/addproduct(_:_:)), [`addingProduct`](https://developer.apple.com/documentation/swift/float/addingproduct(_:_:))
