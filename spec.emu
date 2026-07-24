@@ -5,7 +5,7 @@
 <script src="./spec.js"></script>
 <pre class="metadata">
 title: Fused Multiply Add
-stage: 0
+stage: 2
 contributors: Waldemar Horwat
 </pre>
 

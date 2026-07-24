@@ -1,10 +1,10 @@
 # Fused Multiply-Add
 
-Stage: 0
+Stage: 2
 
 Champion: Waldemar Horwat @waldemarhorwat
 
-[Draft spec](https://waldemarhorwat.github.io/fma/)
+[Draft spec](https://tc39.es/proposal-fma/)
 
 Fused multiply-add is a three-operand IEEE floating-point operation that performs the computation $x × y + z$ with no intermediate rounding of the product — only the final result is rounded.  It is a standard operation supported by modern floating-point hardware and mandated by IEEE 754-2019.
 
