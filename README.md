@@ -32,6 +32,13 @@ For a simple example of how one can use fused multiply-add, here's how we can co
 
 `let high = a * b` (using standard IEEE 754 multiplication)
 
-`let err = Math.fma(a, b, -high)`
+`let err = Math.fusedMultiplyAdd(a, b, -high)`
 
 At this point, barring overflow or underflow of Number's exponent range, $MV(a) × MV(b) = MV(high) + MV(err)$, with $high$ containing the most significant bits of the result and $err$ containing the least significant bits of the result.
+
+## Changes
+
+Made the following changes based on Stage 2 input:
+
+* Renamed from `Math.fma` to `Math.fusedMultiplyAdd`
+* Throw on non-Number inputs to match `Math.sumPrecise`

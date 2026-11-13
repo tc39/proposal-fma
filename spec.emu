@@ -45,27 +45,27 @@ contributors: Waldemar Horwat
   </emu-alg>
 </emu-clause>
 
-<emu-clause id="sec-math.fma" type="built-in function">
-  <h1>Math.fma ( _x_, _y_, _z_ )</h1>
-  <p>This function performs fused multiply-add according to the rules of IEEE 754-2019 binary double-precision arithmetic, computing (_x_ × _y_) + _z_ as a single operation with no intermediate rounding of the product.</p>
+<emu-clause id="sec-math.fusedMultiplyAdd" type="built-in function">
+  <h1>Math.fusedMultiplyAdd ( _x_, _y_, _z_ )</h1>
+  <p>This function performs fused multiply-add according to the rules of IEEE 754-2019 binary double-precision arithmetic, computing (_x_ × _y_) + _z_ as a single operation with no intermediate rounding of the product. If any of the three arguments is not a Number, it throws a *TypeError* exception.</p>
   <p>It performs the following steps when called:</p>
   <emu-alg>
-    1. Let _nx_ be ? ToNumber(_x_).
-    1. Let _ny_ be ? ToNumber(_y_).
-    1. Let _nz_ be ? ToNumber(_z_).
-    1. Let _product_ be FMAMultiply(_nx_, _ny_).
-    1. If _product_ is ~not-a-number~ or _nz_ is *NaN*, return *NaN*.
+    1. If _x_ is not a Number, throw a *TypeError* exception.
+    1. If _y_ is not a Number, throw a *TypeError* exception.
+    1. If _z_ is not a Number, throw a *TypeError* exception.
+    1. Let _product_ be FMAMultiply(_x_, _y_).
+    1. If _product_ is ~not-a-number~ or _z_ is *NaN*, return *NaN*.
     1. If _product_ is ~positive-infinity~, then
-      1. If _nz_ is *-∞*<sub>𝔽</sub>, return *NaN*.
+      1. If _z_ is *-∞*<sub>𝔽</sub>, return *NaN*.
       1. Return *+∞*<sub>𝔽</sub>.
     1. If _product_ is ~negative-infinity~, then
-      1. If _nz_ is *+∞*<sub>𝔽</sub>, return *NaN*.
+      1. If _z_ is *+∞*<sub>𝔽</sub>, return *NaN*.
       1. Return *-∞*<sub>𝔽</sub>.
-    1. If _nz_ is either *+∞*<sub>𝔽</sub> or *-∞*<sub>𝔽</sub>, return _nz_.
-    1. If _product_ is ~negative-zero~, return _nz_.
+    1. If _z_ is either *+∞*<sub>𝔽</sub> or *-∞*<sub>𝔽</sub>, return _z_.
+    1. If _product_ is ~negative-zero~, return _z_.
     1. If _product_ is ~positive-zero~, set _product_ to 0.
-    1. Assert: _product_ and _nz_ are both finite.
-    1. Return 𝔽(_product_ + ℝ(_nz_)).
+    1. Assert: _product_ and _z_ are both finite.
+    1. Return 𝔽(_product_ + ℝ(_z_)).
   </emu-alg>
   <emu-note>
     <p>The single call to 𝔽 in the final step performs exactly one rounding of the infinite-precision product and sum.</p>
