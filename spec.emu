@@ -7,6 +7,7 @@
 title: Fused Multiply Add
 stage: 2
 contributors: Waldemar Horwat
+location: https://tc39.es/proposal-fma/
 </pre>
 
 <emu-clause id="sec-fmamultiply" type="abstract operation">
