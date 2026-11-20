@@ -13,60 +13,61 @@ location: https://tc39.es/proposal-fma/
 <emu-clause id="sec-fmamultiply" type="abstract operation">
   <h1>
     FMAMultiply (
-      _x_: a Number,
-      _y_: a Number,
+      _multiplicand1_: a Number,
+      _multiplicand2_: a Number,
     ): either a non-zero mathematical value, ~not-a-number~, ~positive-infinity~, ~negative-infinity~, ~positive-zero~, or ~negative-zero~
   </h1>
   <dl class="header">
     <dt>description</dt>
-    <dd>It computes the exact mathematical product of _x_ and _y_.
+    <dd>It computes the exact mathematical product of _multiplicand1_ and _multiplicand2_.
     <p>The behaviour matches that of Number::multiply except that no rounding takes place and the result
     is either an exact non-zero mathematical value or an enum indicating a signed zero, a signed infinity, or NaN.</p>
     </dd>
   </dl>
   <emu-alg>
-    1. If _x_ is *NaN* or _y_ is *NaN*, return ~not-a-number~.
+    1. If _multiplicand1_ is *NaN* or _multiplicand2_ is *NaN*, return ~not-a-number~.
     1. Let _sign_ be 1.
-    1. If _x_ is *-0*<sub>𝔽</sub> or _x_ < *-0*<sub>𝔽</sub>, then
-      1. Set _x_ to Number::unaryMinus(_x_).
+    1. If _multiplicand1_ is *-0*<sub>𝔽</sub> or _multiplicand1_ < *-0*<sub>𝔽</sub>, then
+      1. Set _multiplicand1_ to Number::unaryMinus(_multiplicand1_).
       1. Set _sign_ to -_sign_.
-    1. If _y_ is *-0*<sub>𝔽</sub> or _y_ < *-0*<sub>𝔽</sub>, then
-      1. Set _y_ to Number::unaryMinus(_y_).
+    1. If _multiplicand2_ is *-0*<sub>𝔽</sub> or _multiplicand2_ < *-0*<sub>𝔽</sub>, then
+      1. Set _multiplicand2_ to Number::unaryMinus(_multiplicand2_).
       1. Set _sign_ to -_sign_.
-    1. Assert: _x_ and _y_ both have positive signs.
-    1. If _x_ is *+∞*<sub>𝔽</sub> or _y_ is *+∞*<sub>𝔽</sub>, then
-      1. If _x_ is *+0*<sub>𝔽</sub> or _y_ is *+0*<sub>𝔽</sub>, return ~not-a-number~.
+    1. Assert: _multiplicand1_ and _multiplicand2_ both have positive signs.
+    1. If _multiplicand1_ is *+∞*<sub>𝔽</sub> or _multiplicand2_ is *+∞*<sub>𝔽</sub>, then
+      1. If _multiplicand1_ is *+0*<sub>𝔽</sub> or _multiplicand2_ is *+0*<sub>𝔽</sub>, return ~not-a-number~.
       1. If _sign_ is -1, return ~negative-infinity~.
       1. Return ~positive-infinity~.
-    1. If _x_ is *+0*<sub>𝔽</sub> or _y_ is *+0*<sub>𝔽</sub>, then
+    1. If _multiplicand1_ is *+0*<sub>𝔽</sub> or _multiplicand2_ is *+0*<sub>𝔽</sub>, then
       1. If _sign_ is -1, return ~negative-zero~.
       1. Return ~positive-zero~.
-    1. Assert: _x_ and _y_ are both non-zero and finite.
-    1. Return _sign_ × ℝ(_x_) × ℝ(_y_).
+    1. Assert: _multiplicand1_ and _multiplicand2_ are both non-zero and finite.
+    1. Return _sign_ × ℝ(_multiplicand1_) × ℝ(_multiplicand2_).
   </emu-alg>
 </emu-clause>
 
 <emu-clause id="sec-math.fusedMultiplyAdd" type="built-in function">
-  <h1>Math.fusedMultiplyAdd ( _x_, _y_, _z_ )</h1>
-  <p>This function performs fused multiply-add according to the rules of IEEE 754-2019 binary double-precision arithmetic, computing (_x_ × _y_) + _z_ as a single operation with no intermediate rounding of the product. If any of the three arguments is not a Number, it throws a *TypeError* exception.</p>
+  <h1>Math.fusedMultiplyAdd ( _multiplicand1_, _multiplicand2_, _addend_ )</h1>
+  <p>This function performs fused multiply-add according to the rules of IEEE 754-2019 binary double-precision arithmetic, computing (_multiplicand1_ × _multiplicand2_) + _addend_ as a single operation with no intermediate rounding of the product. If any of the three arguments is not a Number, it throws a *TypeError* exception.</p>
   <p>It performs the following steps when called:</p>
   <emu-alg>
-    1. If _x_ is not a Number, throw a *TypeError* exception.
-    1. If _y_ is not a Number, throw a *TypeError* exception.
-    1. If _z_ is not a Number, throw a *TypeError* exception.
-    1. Let _product_ be FMAMultiply(_x_, _y_).
-    1. If _product_ is ~not-a-number~ or _z_ is *NaN*, return *NaN*.
+    1. If _multiplicand1_ is not a Number, throw a *TypeError* exception.
+    1. If _multiplicand2_ is not a Number, throw a *TypeError* exception.
+    1. If _addend_ is not a Number, throw a *TypeError* exception.
+    1. Let _product_ be FMAMultiply(_multiplicand1_, _multiplicand2_).
+    1. If _product_ is ~not-a-number~ or _addend_ is *NaN*, return *NaN*.
     1. If _product_ is ~positive-infinity~, then
-      1. If _z_ is *-∞*<sub>𝔽</sub>, return *NaN*.
+      1. If _addend_ is *-∞*<sub>𝔽</sub>, return *NaN*.
       1. Return *+∞*<sub>𝔽</sub>.
     1. If _product_ is ~negative-infinity~, then
-      1. If _z_ is *+∞*<sub>𝔽</sub>, return *NaN*.
+      1. If _addend_ is *+∞*<sub>𝔽</sub>, return *NaN*.
       1. Return *-∞*<sub>𝔽</sub>.
-    1. If _z_ is either *+∞*<sub>𝔽</sub> or *-∞*<sub>𝔽</sub>, return _z_.
-    1. If _product_ is ~negative-zero~, return _z_.
+    1. If _addend_ is either *+∞*<sub>𝔽</sub> or *-∞*<sub>𝔽</sub>, return _addend_.
+    1. _addend_ is a finite Number.
+    1. If _product_ is ~negative-zero~, return _addend_.
     1. If _product_ is ~positive-zero~, set _product_ to 0.
-    1. Assert: _product_ and _z_ are both finite.
-    1. Return 𝔽(_product_ + ℝ(_z_)).
+    1. Assert: _product_ is a non-zero mathematical value.
+    1. Return 𝔽(_product_ + ℝ(_addend_)).
   </emu-alg>
   <emu-note>
     <p>The single call to 𝔽 in the final step performs exactly one rounding of the infinite-precision product and sum.</p>
