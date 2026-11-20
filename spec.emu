@@ -63,7 +63,7 @@ location: https://tc39.es/proposal-fma/
       1. If _addend_ is *+∞*<sub>𝔽</sub>, return *NaN*.
       1. Return *-∞*<sub>𝔽</sub>.
     1. If _addend_ is either *+∞*<sub>𝔽</sub> or *-∞*<sub>𝔽</sub>, return _addend_.
-    1. _addend_ is a finite Number.
+    1. Assert: _addend_ is a finite Number.
     1. If _product_ is ~negative-zero~, return _addend_.
     1. If _product_ is ~positive-zero~, set _product_ to 0.
     1. Assert: _product_ is a non-zero mathematical value.
